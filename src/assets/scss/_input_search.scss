@@ -1,0 +1,38 @@
+.inputsearch {
+    height: 2.5rem;
+    width: 100%;
+    outline: none;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid #79dc78;
+    outline: none;
+}
+
+.buttonIn {
+    width: 100%;
+    position: relative;
+}
+
+input {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    outline: none;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.buttonIn button {
+    position: absolute;
+    top: 0;
+    border-radius: 5px;
+    right: -1px;
+    z-index: 2;
+    border: none;
+    top: 0px;
+    height: 43px;
+    cursor: pointer;
+    color: white;
+    background-color: #79dc78;
+    transform: translateX(2px);
+}

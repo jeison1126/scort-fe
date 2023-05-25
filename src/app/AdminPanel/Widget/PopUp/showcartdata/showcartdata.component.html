@@ -1,0 +1,32 @@
+<!-- <perfect-scrollbar class=""> -->
+   <div class="">
+      <div class="">
+            <div id="payment-receipt">               
+               <div class="">
+                  <table class="tablegeneral">
+                     <thead>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let prod of data">
+                           <td><img src="{{prod.image}}" alt="Avatar"></td>
+                           <td>{{prod.name}}</td>
+                           <td>{{prod.quantity}}</td>                           
+                           <td>{{prod.price}}</td>
+                           <td>{{prod.price_cant}}</td>
+                        </tr>
+                     </tbody>
+                     <tr>
+                        <td colspan="4" style="padding-top: 15px;"><b>Total</b></td>
+                        <td style="width: 50px;padding-top: 15px;">  
+                           {{total}}
+                        </td>
+                    </tr>
+                  </table>
+               </div>
+            </div>
+      </div>
+      <!-- final-receipt -->
+   </div>
+   <!-- final-receipt-page -->
+<!-- </perfect-scrollbar> -->
+<!-- invoice-popup -->

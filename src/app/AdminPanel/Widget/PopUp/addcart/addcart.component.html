@@ -1,0 +1,27 @@
+<div class="bg-white final-receipt-page">
+    <div class="final-receipt">
+       <mat-card class="pt-0 w-100 m-0">
+          <div id="payment-receipt">
+             <div class="py-1">
+                <div fxLayout="row wrap" fxLayoutAlign="start center" class="col-gap">
+                   <div class="container">
+                      <div class="row">
+                         <div class="col-sm">
+                            <img src="{{data.image}}" alt="Avatar" style="width:200px">                                                   
+                         </div>
+                         <div class="col-sm">
+                            <h5 class="color_title">Agregaste en tu carrito:</h5>                                                      
+                            <p><b>{{data.name}}</b></p>
+                            <p><b>{{data.price | currency : 'USD' : 'symbol' : '1.0-0'}}</b></p>
+                            <p><b>{{data.produc_code}}</b></p>
+                            <button mat-raised-button color="accent" class="w-100" (click)="onClose()">Ver carrito</button>
+                           
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </mat-card>
+    </div>
+ </div>

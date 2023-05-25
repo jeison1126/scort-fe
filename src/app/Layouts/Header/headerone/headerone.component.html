@@ -1,0 +1,518 @@
+<div class="overlay" *ngIf="show_sp">
+    <div class="center_spinner">
+        <img width="200px" src="assets/images/logo_kompralo.gif" />
+        <!-- <mat-progress-spinner diameter=70 mode="indeterminate" color="accent">
+        </mat-progress-spinner> -->
+    </div>
+</div>
+<div class="footermobile hidden-md hidden-lg" fxShow="true" fxHide.gt-sm="true">
+    <ul class="list-inline">
+
+        <li><a class="alogoimgfoot" [routerLink]="['/home']"><img class="logoimgfoot"
+                    src="assets/images/eros_dora_n1_removebg.png" alt=""></a></li>
+        <!-- <li><a [routerLink]="['/home']"><i class="fa fa-home" aria-hidden="true"></i></a></li> -->
+        <!-- <a [routerLink]="['/']"> <img class="logoimg" src="assets/images/eros_dora_n1_removebg.png" alt=""> </a> -->
+
+        <li>
+            <a [routerLink]="['/account/store_adm/edit']"><i class="fa fa-user-circle" aria-hidden="true"></i>
+            </a>
+        </li>
+        <!-- <li class="wishlist">
+            <a>
+                <embryo-HeaderCart [currency]="embryoService?.currency"
+                    [cartProducts]="embryoService?.localStorageCartProducts" [count]="embryoService?.navbarCartCount"
+                    (removeProductData)="openConfirmationPopup($event)">
+                </embryo-HeaderCart>
+            </a>
+        </li> -->
+        <li class="wishlist">
+            <a>
+                <app-wishlist [currency]="embryoService!.currency"
+                    [wishListProducts]="embryoService!.localStorageWishlist"
+                    [count]="embryoService!.navbarWishlistProdCount"
+                    (removeWishListData)="openWishlistConfirmationPopup($event)"
+                    (addAllWishlistToCart)="addAllWishlistToCart($event)" (addToCart)="addToCart($event)">
+                </app-wishlist>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Header Container  -->
+<header id="header" class="dark kompraloheader">
+
+    <!-- Header Top -->
+
+
+
+    <div fxShow="true" fxHide.gt-sm="true" class="mainMenu">
+        <div>
+            <ul>
+                <li class="home hover">
+                    <a [routerLink]="['/']"> <img class="logoimg" src="assets/images/eros_dora_n1_removebg.png" alt="">
+                    </a>
+                </li>
+                <li class="home hover">
+                    <a (click)="routeinicio()">Independientes </a>
+                </li>
+                <!-- <li class="">
+                    <a [routerLink]="['/']">Independientes </a>
+                </li> -->
+                <li class="">
+                    <a *ngIf="show_acces_sell" (click)="routesell()" [routerLink]="['/sell']"
+                        class="space_menus">Publicar anuncio</a>
+                </li>
+                <li class="">
+                    <a *ngIf="show_info" [matMenuTriggerFor]="info_business" class="space_menus pointer">información<i
+                            class="fa fa-chevron-down"></i></a>
+                </li>
+
+                <li class="" style="margin-top: 15px;">
+                    <a *ngIf="show_acces_store" (click)="exit_store_front()" [routerLink]="['/sell']"
+                        class="space_menus">Salir</a>
+                </li>
+
+                
+            </ul>
+        </div>
+
+
+
+
+
+
+
+        <div class="row">
+
+            <div class="header-top-right collapsed-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="inner">
+
+
+                    <ul class="top-link list-inline">
+                        <li class="account">
+                            <a *ngIf="show_add" [routerLink]="['/session/signin']" class="btn-xs">Acceder /
+                                Registrar</a>
+                        </li>
+                        <li class="account">
+                            <a *ngIf="show" [matMenuTriggerFor]="loginuser" class="btn-xs"><span>Administrar
+                                    cuenta</span> <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                        </li>
+
+                        <li class="account"><a *ngIf="show" [routerLink]="['/checkout']"
+                                class="btn-xs"><span>Checkout</span> <i class="fa fa-check-square-o"
+                                    aria-hidden="true"></i></a></li>
+
+
+
+                        <li class="account">
+                            <a *ngIf="show_store_pr" [matMenuTriggerFor]="loginuser_commerce"
+                                class="space_menus pointer">Mi
+                                kompralo<span *ngIf="validate_img" class="material-icons"
+                                    style="color:red;margin-left: 5px;">warning</span><i class="fa fa-chevron-down"
+                                    aria-hidden="true"></i></a>
+                            <mat-menu #loginuser_commerce="matMenu">
+                                <!-- <button mat-menu-item [routerLink]="['/account/profile']"><i
+                                        class="material-icons mr-1 col_icon">account_circle</i><span>Cuenta</span></button> -->
+                                <!-- <button mat-menu-item [routerLink]="['/account/order-history']"><i
+                                        class="material-icons mr-1 col_icon">history</i><span>
+                                        Compras</span></button> -->
+                                <!-- <button mat-menu-item [routerLink]="['/account/address']"><i
+                                        class="material-icons mr-1 col_icon">location_on</i><span>Ubicaciones</span></button> -->
+
+                                <button mat-menu-item [routerLink]="['/account/store_adm/edit']"><i
+                                        class="material-icons mr-1 col_icon">account_balance</i><span>Anuncio<span
+                                            *ngIf="validate_img"
+                                            class="material-icons warning">warning</span></span></button>
+                                <!-- <button mat-menu-item [routerLink]="['/admin-panel/products']"><i
+                                    class="material-icons mr-1 col_icon">queue_play_next</i><span>Productos</span></button> -->
+                                <button mat-menu-item [routerLink]="['/account/schelude']"><i
+                                        class="material-icons mr-1 col_icon">add_shopping_cart</i><span>Horarios</span></button>
+
+                                <button mat-menu-item [routerLink]="['/account/services_qualities']"><i
+                                        class="material-icons mr-1 col_icon">manage_accounts</i><span>Servicios
+                                        Cualidades</span></button>
+
+                                <button mat-menu-item (click)="RouteUbication()"><i
+                                        class="material-icons mr-1 col_icon">where_to_vote</i><span>Deja tu ubicación</span></button>
+
+                                <!-- <button mat-menu-item [routerLink]="['/account/invoice_adm']"><i
+                                        class="material-icons mr-1 col_icon">fact_check</i><span>Facturas</span></button> -->
+
+                                <!-- <button mat-menu-item [routerLink]="['/account/balance_status']"><i
+                                        class="material-icons mr-1 col_icon">paid</i><span>Saldo</span></button> -->
+
+                                <!-- <button mat-menu-item [routerLink]="['/account/transfers_view']"><i
+                                        class="material-icons mr-1 col_icon">assignment</i><span>Transferencias</span></button> -->
+
+                                <!-- <button mat-menu-item (click)="RouteAssitedSelling()"><i
+                                        class="material-icons mr-1 col_icon">link</i><span>Compra
+                                        asistida</span></button> -->
+
+                                <button mat-menu-item (click)="exit_store_front()"><i
+                                        class="material-icons mr-1 col_icon">power_settings_new</i><span>Salir</span></button>
+                            </mat-menu>
+
+                        </li>
+
+                    </ul>
+
+                    <mat-menu #loginuser="matMenu">
+                        <!-- <button mat-menu-item [routerLink]="['/account/profile']"><i
+                                class="material-icons mr-1 col_icon">settings</i><span>Cuenta</span></button>
+                        <button mat-menu-item [routerLink]="['/account/order-history']"><i
+                                class="material-icons mr-1 col_icon">add_shopping_cart</i><span>compras</span></button>
+                        <button mat-menu-item [routerLink]="['/account/address']"><i
+                                class="material-icons mr-1 col_icon">location_on</i><span>ubicaciones</span></button> -->
+                        <button mat-menu-item (click)="exit_store_front()"><i
+                                class="material-icons mr-1 col_icon">power_settings_new</i><span>Salir..</span></button>
+                    </mat-menu>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- //Header Top -->
+
+    <!-- FIXED -->
+    <div class="">
+        <!-- Header center -->
+        <div class="header-middle  hidden-compact fixedheader horizontaldim">
+            <div class="container">
+                <div class="row center-just">
+                    <!-- Logo -->
+                    <div class="navbar-logo col-lg-1 col-md-1 col-sm-12 col-xs-12 posts">
+                        <div class="logo">
+                            <app-applogo></app-applogo>
+                        </div>
+                        <div>
+                            <a class="menuBtn" fxShow="true" fxHide.gt-sm="true">
+                                <span class="lines"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- //  / Logo -->
+                    <!-- Buscador -->
+                    <div class="middle2 col-lg-5 col-md-6 col-sm-12 col-xs-12">
+                        <div class="search-header-w">
+
+                            <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
+                                <form class="busc">
+
+                                    <input placeholder="Buscar por zona" class="inputsearch inputseacl" type="search"
+                                        aria-label="Number" matInput (keyup.enter)="getPostsEnter($event)"
+                                        [formControl]="myControl" [matAutocomplete]="auto" (keyup)="updated($event)"
+                                        [(ngModel)]="data" autocomplete="off">
+                                    <button (click)="getPostsEnter($event)"
+                                        class="btn btn-primary button-search class_search" type="submit" tabindex="-1">
+                                        <span class="mat-button-wrapper">
+                                            <i class="fa fa-search"></i>
+                                        </span></button>
+                                    <mat-autocomplete #auto="matAutocomplete"
+                                        (optionSelected)='getPosts($event.option.value)'>
+                                        <mat-option *ngFor="let option of options" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-lg-2 col-md-2 col-sm-12 col-xs-12 posts deletelaptop">
+                        <button class="btn button-mark" (click)="activateSelect()" onclick="getLocation()">
+                            <span class="mat-button-wrapper">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                        </button>
+                        <select name="mes" id="selectAge" class="form-control" [disabled]="isDisabled"
+                            (change)="finByLocation($event.target)" [(ngModel)]='ngDropdown'>
+                            <option value=""></option>
+                            <option value="1">1 KM</option>
+                            <option value="3">3 KM</option>
+                            <option value="400">400 KM</option>
+                        </select>
+
+                        <button class="btn btn-primary button-filter" (click)="filterView()">
+                            <span class="mat-button-wrapper">
+                                <i class="fa fa-filter"></i>
+                            </span>
+                        </button>
+
+                    </div>
+
+
+
+                    <div class=" col-lg-2 col-md-2 col-sm-12 col-xs-12 posts deletemobile">
+                        <button class="btn btn-primary button-mark" (click)="activateSelect()" onclick="getLocation()">
+                            <span class="mat-button-wrapper">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                        </button>
+                        <select name="mes" id="selectAge" class="form-control" [disabled]="isDisabled"
+                            (change)="finByLocation($event.target)" [(ngModel)]='ngDropdown'>
+                            <option value=""></option>
+                            <option value="1">1 KM</option>
+                            <option value="3">3 KM</option>
+                            <option value="400">400 KM</option>
+                        </select>
+
+                    </div>
+
+                    <div class=" col-lg-1 col-md-1 col-sm-6 col-xs-6 deletemobile">
+                        <button class="btn btn-primary button-filter" (click)="filterView()">
+                            <span class="mat-button-wrapper">
+                                <i class="fa fa-filter"></i>
+                            </span>
+                        </button>
+                    </div>
+
+
+
+                    <!-- //  / Buscador -->
+                    <div class="middle3 col-lg-1 col-md-1 col-sm-12 col-xs-12 ">
+                        <!--Carrito-->
+                        <!-- <div class="shopping_cart " fxShow="false" fxHide.gt-sm="false">
+                            <div id="cart" class="btn-shopping-cart">
+                                <embryo-HeaderCart [currency]="embryoService?.currency" [cartProducts]="embryoService?.localStorageCartProducts" [count]="embryoService?.navbarCartCount" (removeProductData)="openConfirmationPopup($event)">
+                                </embryo-HeaderCart>
+                            </div>
+                        </div> -->
+                        <!--//Carrito-->
+
+                        <div class="shopping_cart " fxShow="false" fxHide.gt-sm="false">
+                            <app-wishlist [currency]="embryoService!.currency"
+                                [wishListProducts]="embryoService!.localStorageWishlist"
+                                [count]="embryoService!.navbarWishlistProdCount"
+                                (removeWishListData)="openWishlistConfirmationPopup($event)"
+                                (addAllWishlistToCart)="addAllWishlistToCart($event)" (addToCart)="addToCart($event)">
+                            </app-wishlist>
+                        </div>
+
+
+
+                        <!-- <a class="menuBtn" fxShow="true" fxHide.gt-sm="true">
+                            <span class="lines"></span>
+                        </a> -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- //Header center -->
+
+        <!-- Header Bottom -->
+
+        <!-- /Header Bottom -->
+    </div>
+    <!-- /FIXED -->
+
+</header>
+
+
+
+<div class="header-bottom">
+    <div class="container">
+        <div class="row">
+
+            <!-- Main menu -->
+            <div class="main-menu col-lg-12 col-md-12">
+                <div class="responsive so-megamenu megamenu-style-dev">
+                    <nav class="navbar-default" fxShow="false" fxHide.gt-sm="false">
+                        <div class=" container-megamenu  horizontal open ">
+
+
+                            <div class="megamenu-wrapper d-sm-block">
+
+                                <div class="megamenu-pattern">
+                                    <div class="container-mega">
+
+                                        <ul class="megamenu" data-transition="slide" data-animationtime="250">
+
+                                            <li class="">
+                                                <a [routerLink]="['/']">Independientes </a>
+                                            </li>
+
+                                            <!-- <li class="with-sub-menu hover">
+                                                <a [routerLink]="['/storelist']" class="space_menus">Agencias</a>
+                                            </li> -->
+
+
+                                            <li class="">
+                                                <a *ngIf="show_acces_sell" [routerLink]="['/sell']"
+                                                    class="space_menus">Publicar anuncio</a>
+                                            </li>
+
+                                            <li class="">
+
+                                                <a *ngIf="show_info" [matMenuTriggerFor]="info_business"
+                                                    class="space_menus pointer">informacion<i
+                                                        class="fa fa-chevron-down"></i></a>
+                                            </li>
+                                        </ul>
+
+
+                                        <mat-menu color="primary" #cat="matMenu" class="custom-menu">
+
+                                            <ul>
+                                                <li *ngFor="let item of  get_categories; let i = index" id="item{{i}}">
+                                                    <a [routerLink]="['/searchstorebycategories/',item.id]">
+                                                        {{item.name_category}}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </mat-menu>
+
+
+
+                                        <mat-menu color="primary" #info_business="matMenu" class="custom-menu">
+                                            <button mat-menu-item (click)="routerlegalinfo()" class="rad-info">
+                                                Información legal </button>
+                                            <!-- <button mat-menu-item [routerLink]="['/data_protection']" class="rad-info">
+                                                <span>Protección de datos</span></button> -->
+                                            <!-- <button mat-menu-item [routerLink]="['/payment_information']"
+                                                class="rad-info">
+                                                <span>Información de proceso de pago</span></button> -->
+                                            <!-- <button mat-menu-item [routerLink]="['/assisted_buy']" class="rad-info">
+                                                <span>Compra asistida</span></button> -->
+                                            <!-- <button mat-menu-item [routerLink]="['/calculator2']" class="rad-info">
+                                                <span>Calculadora de tarifas</span></button> -->
+                                        </mat-menu>
+
+                                        <mat-menu #loginuser_commerce="matMenu">
+                                            <button mat-menu-item [routerLink]="['/account/profile']"><i
+                                                    class="material-icons mr-1 col_icon">account_circle</i><span>Tu
+                                                    Información</span></button>
+                                            <button mat-menu-item [routerLink]="['/account/order-history']"><i
+                                                    class="material-icons mr-1 col_icon">history</i><span>
+                                                    Compras</span></button>
+                                            <button mat-menu-item [routerLink]="['/account/address']"><i
+                                                    class="material-icons mr-1 col_icon">location_on</i><span>Ubicaciones</span></button>
+                                            <!-- <button mat-menu-item [routerLink]="['/admin-panel/products']"><i
+                                         class="material-icons mr-1 col_icon">queue_play_next</i><span>Productos</span></button> -->
+                                            <button mat-menu-item [routerLink]="['/account/invoice_adm']"><i
+                                                    class="material-icons mr-1 col_icon">fact_check</i><span>Facturas</span></button>
+                                            <button mat-menu-item [routerLink]="['/account/store_adm/edit']"><i
+                                                    class="material-icons mr-1 col_icon">account_balance</i><span>Anuncio<span
+                                                        *ngIf="validate_img"
+                                                        class="material-icons i-error">warning</span></span></button>
+
+                                            <button mat-menu-item [routerLink]="['/account/schelude']"><i
+                                                    class="material-icons mr-1 col_icon">add_shopping_cart</i><span>Horarios</span></button>
+
+                                            <button mat-menu-item (click)="exit_store_front()"><i
+                                                    class="material-icons mr-1 col_icon">power_settings_new</i><span>Salir</span></button>
+                                        </mat-menu>
+
+
+
+
+                                        <ul class="menu3 top-link list-inline">
+                                            <li class="account">
+                                                <a *ngIf="show_add" [routerLink]="['/session/signin']"
+                                                    class="btn-xs">Acceder</a>
+                                            </li>
+                                            <li class="account">
+                                                <a *ngIf="show" [matMenuTriggerFor]="loginuser"
+                                                    class="btn-xs"><span>Administrar cuenta</span> <i
+                                                        class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                                            </li>
+
+                                            <!-- <li class="account"><a *ngIf="show" [routerLink]="['/checkout']" class="btn-xs"><span>Checkout</span> <i class="fa fa-check-square-o"
+                                                        aria-hidden="true"></i></a>
+                                            </li> -->
+
+
+
+                                            <li class="account">
+                                                <a *ngIf="show_store_pr" [matMenuTriggerFor]="loginuser_commerce"
+                                                    class="space_menus pointer">Administrar cuenta
+                                                    <span *ngIf="validate_img" class="material-icons"
+                                                        style="color:red;margin-left: 5px;">warning</span><i
+                                                        class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                                                <mat-menu #loginuser_commerce="matMenu">
+                                                    <button mat-menu-item [routerLink]="['/account/profile']"><i
+                                                            class="material-icons mr-1 col_icon">account_circle</i><span>Cuenta</span></button>
+                                                    <button mat-menu-item [routerLink]="['/account/order-history']"><i
+                                                            class="material-icons mr-1 col_icon">history</i><span>
+                                                            Compras</span></button>
+                                                    <!-- <button mat-menu-item [routerLink]="['/account/address']"><i
+                                                            class="material-icons mr-1 col_icon">location_on</i><span>Ubicaciones</span></button> -->
+                                                    <!-- <button mat-menu-item [routerLink]="['/admin-panel/products']"><i
+                                                class="material-icons mr-1 col_icon">queue_play_next</i><span>Productos</span></button> -->
+                                                    <!-- <button mat-menu-item [routerLink]="['/account/invoice_adm']"><i
+                                                            class="material-icons mr-1 col_icon">fact_check</i><span>Facturas</span></button> -->
+                                                    <button mat-menu-item [routerLink]="['/account/store_adm/edit']"><i
+                                                            class="material-icons mr-1 col_icon">account_balance</i><span>Anuncio<span
+                                                                *ngIf="validate_img" class="material-icons"
+                                                                style="color:red;margin-left: 5px;">warning</span></span></button>
+
+                                                    <button mat-menu-item [routerLink]="['/account/schelude']"><i
+                                                            class="material-icons mr-1 col_icon">add_shopping_cart</i><span>Horarios</span></button>
+
+                                                    <button mat-menu-item (click)="exit_store_front()"><i
+                                                            class="material-icons mr-1 col_icon">power_settings_new</i><span>Salir</span></button>
+                                                </mat-menu>
+
+                                            </li>
+
+                                        </ul>
+
+                                        <mat-menu #loginuser="matMenu">
+                                            <button mat-menu-item [routerLink]="['/account/profile']"><i
+                                                    class="material-icons mr-1 col_icon">settings</i><span>Cuenta</span></button>
+                                            <!-- <button mat-menu-item [routerLink]="['/account/order-history']"><i
+                                                    class="material-icons mr-1 col_icon">add_shopping_cart</i><span>compras</span></button> -->
+                                            <!-- <button mat-menu-item [routerLink]="['/account/address']"><i
+                                                    class="material-icons mr-1 col_icon">location_on</i><span>ubicaciones</span></button> -->
+                                            <button mat-menu-item (click)="exit_store_front()"><i
+                                                    class="material-icons mr-1 col_icon">power_settings_new</i><span>Salir..</span></button>
+                                        </mat-menu>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- //  / Main menu -->
+
+        
+        </div>
+    </div>
+
+</div>
+<!-- <div class="header-pendient" *ngIf="validate_img">
+    <div class="container">
+        <div align="center" style="padding-top: 10px;">
+            <b>Sube tus fotos para finalizar tu publicación</b>
+        </div>
+    </div>
+</div>
+
+<div class="header-pendient-serv" *ngIf="validate_serv" >
+    <div class="container">
+        <div align="center" style="padding-top: 10px;">
+            <b>Registra tus servicios (opcional)</b>
+        </div>
+    </div>
+</div>
+
+<div class="header-pendient-maps" *ngIf="validate_map" >
+    <div class="container">
+        <div align="center" style="padding-top: 10px;">
+            <b>Guarda tu ubicación en maps (opcional)</b>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- //Header Container  -->

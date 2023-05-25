@@ -1,0 +1,184 @@
+<p>shopdetails works!</p>
+<div class="product-detail-page section-gap mt-5" *ngIf="detailData">
+    <!-- view to mobile pixels -->
+    <div class="container white containerdetail deletemobilebanner ">
+        <div class="flexbox">
+            <div>
+                <img class="imglog" src="{{mainImgPath}}">
+            </div>
+            <div class="infobanner">
+                <div class="" style="margin-bottom: 0px;">
+                    <b>{{detailData?.name}}</b>
+                </div>
+                <div class="">
+                    <b>{{detailData?.location}} - {{detailData?.age}} años..</b>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5  col-sm-12 col-xs-12">
+
+                <div class="product-detail-content">
+                    <div class="">
+                        <b>Categoría:</b> {{id_category}}
+                    </div>
+
+                    <div class="product_page_price price mb-2" itemprop="offerDetails" itemscope=""
+                        itemtype="http://data-vocabulary.org/Offer">
+
+                        <p class="price red">
+                            <span class="price-red">{{detailData?.getRate | currency : 'USD' : 'symbol' : '1.0-0'}} <img
+                                    class="cards" src="assets/images/tarjetas.png" /> </span>
+                        </p>
+                    </div>
+                    <div class="">
+                        <a *ngIf="CheckedValidwp">Escribeme al Whatsapp <img class="img-info"
+                                src="assets/images/icons/whatsapp.png" style="max-width: 6%;"></a>
+                    </div>
+                    <div class="short-des desc-mobile">
+                        <p>{{detailData?.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- view to pc pixels -->
+    <div class="container white containerdetail deletemopcbanner ">
+        <div class="flexbox">
+            <div>
+                <img class="imglog" src="{{mainImgPath}}">
+            </div>
+            <div class="infogeneralpc">
+                <div class="" style="margin-bottom: 0px;">
+                    <b>{{detailData?.name}}</b>
+                </div>
+                <div class="">
+                    <b>{{detailData?.location}} - {{detailData?.age}} años...</b>
+                </div>
+                <div class="">
+                    <b>Categoría:</b> {{id_category}}
+                </div>
+                <div class="product_page_price price mb-2" itemprop="offerDetails" itemscope=""
+                    itemtype="http://data-vocabulary.org/Offer">
+
+                    <p class="price red">
+                        <span class="price-red">{{detailData?.getRate | currency : 'USD' : 'symbol' : '1.0-0'}} <img
+                                class="cards" src="assets/images/tarjetas.png" /> </span>
+                    </p>
+                </div>
+
+                <div class="">
+                    <a *ngIf="CheckedValidwp">Escribeme al Whatsapp <img class="img-info"
+                            src="assets/images/icons/whatsapp.png" style="max-width: 6%;"></a>
+                </div>
+                <div class="short-des desc-mobile">
+                    <p>{{detailData?.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5  col-sm-12 col-xs-12">
+
+                <div class="product-detail-content">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container white2 containerdetail " >
+        <mat-tab-group>
+
+            <mat-tab label="Fotos">
+                <div style="margin-bottom: 30px;" class="picmargin" >
+                    <div fxLayout="row wrap" fxLayoutGap="16px grid" class="bordercolpic">
+                        <mat-card class="example-card card_store_prod" fxFlex="33%" fxFlex.xs="50%" fxFlex.sm="33%"
+                            *ngFor="let img of detailData?.image_gallery  | paginate: { itemsPerPage: 35, currentPage: p }" >
+                            
+                                <img width="500px" [src]="img" alt="" class="galeria_item">
+                            
+                        </mat-card>
+                    </div>
+                </div>
+
+
+            </mat-tab>
+            <mat-tab label="Info">
+                <div style="margin-bottom: 30px;">
+                    <div class="bordercol">
+                        <div class="short-des">
+                            <p><span class="font-medium"> Tarifas </span></p>
+                        </div>
+                        <div class="bullets-points">
+                            <ul class="bullets-list" *ngFor="let feature of rates">
+                                <li *ngIf="feature.rate">
+                                    <span class="font-medium">{{feature.rate}}</span> {{feature.total_price|currency :
+                                    'USD'
+                                    : 'symbol' : '1.0-0'}} COP
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bordercol">
+                        <div class="short-des">
+                            <p><span class="font-medium"> Horarios </span></p>
+                        </div>
+                        <div class="bullets-points">
+
+                            <ul class="bullets-list" *ngFor="let sche of schedule">
+                                <li *ngIf="sche.id">
+                                    {{sche.day}} desde las {{sche.from_hour_split}}:{{sche.from_minute}}
+                                    {{sche.from_minute_split}} hasta las {{sche.until_hour_split}}:{{sche.until_minute}}
+                                    {{sche.until_minute_split}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bordercol" *ngIf="validate_maps">
+                        <div class="short-des">
+                            <p><span class="font-medium"> Mapa </span></p>
+                        </div>
+                        <div class="bullets-points map-container">
+                            <google-map [center]="position">
+                                <map-marker [position]="position" [label]="label" [title]="title">
+                                </map-marker>
+                            </google-map>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Servicio">
+                <div style="margin-bottom: 30px;">
+                    <div class="bordercol">
+                        <h4 class="font-medium">Servicios</h4>
+                        <div class="bullets-points">
+                            <ul class="bullets-list">
+                                <li *ngFor="let ser of services">
+                                    {{ser.service}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bordercol">
+                        <h4 class="font-medium">Cualidades</h4>
+                        <div class="bullets-points">
+                            <ul class="bullets-list">
+                                <li *ngFor="let qa of qualities">
+                                    {{qa.quality}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+
+
+
+</div>
